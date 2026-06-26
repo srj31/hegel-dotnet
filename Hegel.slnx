@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hegel/Hegel.fsproj" />
+    <Project Path="src/Hegel.Xunit/Hegel.Xunit.fsproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hegel.Tests/Hegel.Tests.fsproj" />
+    <Project Path="tests/Hegel.Conformance/Hegel.Conformance.fsproj" />
+  </Folder>
+</Solution>

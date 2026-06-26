@@ -1,0 +1,20 @@
+hegel-dotnet
+============
+
+A .NET client for the Hegel property-based testing protocol.
+
+This project is an independent client implementation for the Hegel protocol.
+It is not affiliated with or endorsed by the Hegel project, but is built
+against — and owes its design to — the upstream work at https://hegel.dev:
+
+  * hegeldev/hegel-core       — the protocol + Python server, built on Hypothesis
+                                (David R. MacIver, Liam DeVoe; MIT License)
+  * hegeldev/hegel-rust       — the engine compiled to the native `libhegel`
+                                C ABI that this client binds to (MIT License)
+  * hegeldev/hegel-java       — reference client; the FFI/run-loop model here
+                                is ported from it (MIT License)
+  * hegeldev/hegel-typescript — reference client (MIT License)
+
+Hypothesis (https://github.com/hypothesisworks/hypothesis) underpins the
+generation and shrinking engine. See each upstream repository for its own
+license and copyright.

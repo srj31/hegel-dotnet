@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Hegel</RootNamespace>
+    <AssemblyName>Hegel</AssemblyName>
+    <PackageId>Hegel</PackageId>
+    <Description>A .NET client for the Hegel property-based testing protocol, built on Hypothesis.</Description>
+    <Authors>Sourabh Jaiswal</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/srj31/hegel-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/srj31/hegel-dotnet</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- F# compiles top-down: files must be listed in dependency order. -->
+  <ItemGroup>
+    <Compile Include="Interop/Abi.fs" />
+    <Compile Include="Interop/NativeMethods.fs" />
+    <Compile Include="Interop/LibraryLoader.fs" />
+    <Compile Include="Cbor/Wtf8.fs" />
+    <Compile Include="Cbor/CborCodec.fs" />
+    <Compile Include="Exceptions.fs" />
+    <Compile Include="Enums.fs" />
+    <Compile Include="Database.fs" />
+    <Compile Include="Settings.fs" />
+    <Compile Include="IDataSource.fs" />
+    <Compile Include="Generator.fs" />
+    <Compile Include="Generators/IntegerGenerator.fs" />
+    <Compile Include="Generators/BooleanGenerator.fs" />
+    <Compile Include="Gen.fs" />
+    <Compile Include="Engine.fs" />
+    <Compile Include="LiveDataSource.fs" />
+    <Compile Include="Runner.fs" />
+    <Compile Include="Property.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="System.Formats.Cbor" />
+  </ItemGroup>
+
+</Project>

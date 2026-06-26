@@ -1,0 +1,25 @@
+<Project>
+
+  <!-- Shared settings for every project in the solution. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Reference FSharp.Core explicitly (via Central Package Management) rather
+         than the SDK-implicit one, so a concrete FSharp.Core.dll is deployed to
+         each output — the .NET 10 test host fails to resolve the implicit one
+         during F# test discovery. Every project adds the matching PackageReference. -->
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+
+    <!-- Quality gates. We don't fail the build on warnings while the surface is
+         still `failwith "Not implemented"` stubs.
+         TODO: flip TreatWarningsAsErrors back to true once implemented. -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Central Package Management (versions live in Directory.Packages.props). -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+</Project>

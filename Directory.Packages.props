@@ -1,0 +1,26 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- FSharp.Core 10.1.x carries assembly version 10.1.0.0, matching the .NET 10
+         SDK's F# compiler; referenced explicitly so it deploys to every output. -->
+    <PackageVersion Include="FSharp.Core" Version="10.1.301" />
+
+    <!-- Core: CBOR codec for schema/value framing across the libhegel C ABI.
+         System.Formats.Cbor is the built-in BCL CBOR reader/writer. -->
+    <PackageVersion Include="System.Formats.Cbor" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test">
+    <!-- Versions current for .NET 10. xunit.runner.visualstudio 3.x is required
+         to resolve FSharp.Core 10.x during F# test discovery (2.8.x skips it). -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+  </ItemGroup>
+
+</Project>

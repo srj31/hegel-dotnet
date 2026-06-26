@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Hegel.Xunit</RootNamespace>
+    <AssemblyName>Hegel.Xunit</AssemblyName>
+    <PackageId>Hegel.Xunit</PackageId>
+    <Description>xUnit integration for hegel-dotnet: the [Property] attribute.</Description>
+    <Authors>Sourabh Jaiswal</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/srj31/hegel-dotnet</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- An integration library, not a test project: it references xunit only for
+         the FactAttribute base class. Keep `dotnet test` from trying to run it. -->
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="PropertyAttribute.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Hegel/Hegel.fsproj" />
+    <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="xunit" />
+  </ItemGroup>
+
+</Project>
