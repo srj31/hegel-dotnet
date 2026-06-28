@@ -15,9 +15,21 @@ open System.Runtime.InteropServices
 /// `docs/ARCHITECTURE.md` §3 and filled in alongside the run loop.
 module internal NativeMethods =
 
-    [<DllImport("hegel", EntryPoint = "hegel_version", CallingConvention = CallingConvention.Cdecl)>]
-    extern nativeint Version()
+    // Every entry point except `hegel_context_new` takes a `hegel_context_t*` first
+    // and returns `hegel_result_t` (`Abi.Result`); `hegel_context_new` never returns NULL.
+    [<DllImport("hegel", EntryPoint = "hegel_context_new", CallingConvention = CallingConvention.Cdecl)>]
+    extern nativeint ContextNew()
 
+    [<DllImport("hegel", EntryPoint = "hegel_context_free", CallingConvention = CallingConvention.Cdecl)>]
+    extern Abi.Result ContextFree(nativeint ctx)
+
+    /// `outVersion` receives an engine-owned `char*`, marshalled as `nativeint` (not
+    /// `string`) so the runtime never frees it; `Engine.Version` copies it out.
+    [<DllImport("hegel", EntryPoint = "hegel_version", CallingConvention = CallingConvention.Cdecl)>]
+    extern Abi.Result Version(nativeint ctx, nativeint& outVersion)
+
+    // NOTE: the declarations below are still the pre-context ABI (no ctx arg, wrong
+    // return types). Unused until M1, where they'll be corrected. See ARCHITECTURE §3.
     [<DllImport("hegel", EntryPoint = "hegel_settings_new", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint SettingsNew()
 

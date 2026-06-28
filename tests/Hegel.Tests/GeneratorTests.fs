@@ -18,3 +18,9 @@ let ``Settings with-expression derives variant`` () =
             TestCases = 500L }
 
     Assert.Equal(500L, settings.TestCases)
+
+[<Fact>]
+let ``Engine version is reported`` () =
+    let version = Engine.Shared.Version()
+
+    Assert.NotEmpty version

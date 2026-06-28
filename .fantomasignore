@@ -1,0 +1,3 @@
+# Fantomas uses its own ignore file (it does NOT read .gitignore).
+# Keep scratch / spike F# files out of the format check.
+spike/

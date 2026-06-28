@@ -35,3 +35,6 @@ result-*
 
 # OS
 .DS_Store
+
+# Local scratch / experiments / spikes
+spike/
