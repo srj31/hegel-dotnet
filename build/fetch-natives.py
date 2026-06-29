@@ -8,9 +8,9 @@ Release asset names (lib-prefixed on every platform):
     libhegel-<os>-<arch>.(so|dylib|dll)        e.g. libhegel-linux-amd64.so
 with a sibling <name>.sha256 (GNU sha256sum format).
 
-Output names follow what `DllImport("hegel")` resolves to on each platform:
-    Windows -> hegel.dll          (no 'lib' prefix)
-    Unix    -> libhegel.(so|dylib)
+Output is always `libhegel.(so|dylib|dll)`: the binding imports the native as
+`libhegel` (not `hegel`) so that on case-insensitive Windows it never collides with
+the managed `Hegel.dll` assembly.
 
 By default this fetches only the *host* RID (fast, for local dev / the test
 suite). Pass `--rid all` to populate the full matrix for packaging.
@@ -40,11 +40,6 @@ ASSET_TO_RID: dict[tuple[str, str], tuple[str, str]] = {
     ("windows", "arm64"): ("win-arm64", "dll"),
 }
 RID_TO_ASSET = {rid: key for key, (rid, _ext) in ASSET_TO_RID.items()}
-
-
-def output_name(os_name: str, ext: str) -> str:
-    """The filename `DllImport("hegel")` resolves to on the target platform."""
-    return f"hegel.{ext}" if os_name == "windows" else f"libhegel.{ext}"
 
 
 def host_rid() -> str:
@@ -119,7 +114,7 @@ def main(argv: list[str]) -> int:
         if asset not in assets:
             sys.exit(f"[fetch-natives] release {tag} has no asset {asset!r}")
 
-        dest = out_root / rid / "native" / output_name(os_name, ext)
+        dest = out_root / rid / "native" / f"libhegel.{ext}"
         print(f"[fetch-natives] {tag}: {asset} -> {dest}", file=sys.stderr)
         blob = download(assets[asset])
 

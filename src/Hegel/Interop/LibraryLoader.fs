@@ -14,7 +14,7 @@ open System.Runtime.InteropServices
 module internal LibraryLoader =
 
     [<Literal>]
-    let private LibraryName = "hegel"
+    let private LibraryName = "libhegel"
 
     let private resolve
         (libraryName: string)

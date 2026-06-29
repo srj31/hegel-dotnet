@@ -17,36 +17,36 @@ module internal NativeMethods =
 
     // Every entry point except `hegel_context_new` takes a `hegel_context_t*` first
     // and returns `hegel_result_t` (`Abi.Result`); `hegel_context_new` never returns NULL.
-    [<DllImport("hegel", EntryPoint = "hegel_context_new", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_context_new", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint ContextNew()
 
-    [<DllImport("hegel", EntryPoint = "hegel_context_free", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_context_free", CallingConvention = CallingConvention.Cdecl)>]
     extern Abi.Result ContextFree(nativeint ctx)
 
     /// `outVersion` receives an engine-owned `char*`, marshalled as `nativeint` (not
     /// `string`) so the runtime never frees it; `Engine.Version` copies it out.
-    [<DllImport("hegel", EntryPoint = "hegel_version", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_version", CallingConvention = CallingConvention.Cdecl)>]
     extern Abi.Result Version(nativeint ctx, nativeint& outVersion)
 
     // NOTE: the declarations below are still the pre-context ABI (no ctx arg, wrong
     // return types). Unused until M1, where they'll be corrected. See ARCHITECTURE §3.
-    [<DllImport("hegel", EntryPoint = "hegel_settings_new", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_settings_new", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint SettingsNew()
 
-    [<DllImport("hegel", EntryPoint = "hegel_settings_free", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_settings_free", CallingConvention = CallingConvention.Cdecl)>]
     extern void SettingsFree(nativeint settings)
 
-    [<DllImport("hegel", EntryPoint = "hegel_run_start", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_run_start", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint RunStart(nativeint settings)
 
-    [<DllImport("hegel", EntryPoint = "hegel_run_free", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_run_free", CallingConvention = CallingConvention.Cdecl)>]
     extern void RunFree(nativeint run)
 
-    [<DllImport("hegel", EntryPoint = "hegel_next_test_case", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_next_test_case", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint NextTestCase(nativeint run)
 
-    [<DllImport("hegel", EntryPoint = "hegel_run_result", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_run_result", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint RunResult(nativeint run)
 
-    [<DllImport("hegel", EntryPoint = "hegel_last_error_message", CallingConvention = CallingConvention.Cdecl)>]
+    [<DllImport("libhegel", EntryPoint = "hegel_last_error_message", CallingConvention = CallingConvention.Cdecl)>]
     extern nativeint LastErrorMessage()
