@@ -23,7 +23,7 @@ format-check:
 
 # Download the libhegel native binaries from the hegel-rust releases and lay
 # them out under runtimes/<rid>/native/ for packaging. See build/fetch-natives.py.
-fetch-natives version="latest":
+fetch-natives version="v0.23.1":
     python3 build/fetch-natives.py --version {{version}}
 
 # Pack the NuGet packages (after fetch-natives).

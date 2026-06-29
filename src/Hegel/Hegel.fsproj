@@ -39,15 +39,16 @@
     <PackageReference Include="System.Formats.Cbor" />
   </ItemGroup>
 
-  <!-- Copy the host-RID native beside build output so the loader finds libhegel by
-       default (no HEGEL_LIBHEGEL_PATH). Path is relative to this project file.
+  <!-- Copy the host-RID native beside build output so the loader finds it by default
+       (no HEGEL_LIBHEGEL_PATH). Path is relative to this project file. The glob
+       `*hegel.*` matches `hegel.dll` (Windows) and `libhegel.so`/`.dylib` (Unix).
        Populate with `just fetch-natives`; NuGet packaging is handled at pack time. -->
   <PropertyGroup>
     <HegelHostRid Condition="'$(HegelHostRid)' == ''">$(NETCoreSdkRuntimeIdentifier)</HegelHostRid>
     <HegelNativeDir>../../runtimes/$(HegelHostRid)/native/</HegelNativeDir>
   </PropertyGroup>
   <ItemGroup Condition="Exists('$(HegelNativeDir)')">
-    <None Include="$(HegelNativeDir)libhegel.*" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+    <None Include="$(HegelNativeDir)*hegel.*" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
